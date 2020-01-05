@@ -1,9 +1,0 @@
-E:\JFF\FUN\BankApplication\bin\Debug\netcoreapp2.1\BankApplication.deps.json
-E:\JFF\FUN\BankApplication\bin\Debug\netcoreapp2.1\BankApplication.dll
-E:\JFF\FUN\BankApplication\bin\Debug\netcoreapp2.1\BankApplication.pdb
-E:\JFF\FUN\BankApplication\obj\Debug\netcoreapp2.1\BankApplication.csprojAssemblyReference.cache
-E:\JFF\FUN\BankApplication\obj\Debug\netcoreapp2.1\BankApplication.csproj.CoreCompileInputs.cache
-E:\JFF\FUN\BankApplication\obj\Debug\netcoreapp2.1\BankApplication.AssemblyInfoInputs.cache
-E:\JFF\FUN\BankApplication\obj\Debug\netcoreapp2.1\BankApplication.AssemblyInfo.cs
-E:\JFF\FUN\BankApplication\obj\Debug\netcoreapp2.1\BankApplication.dll
-E:\JFF\FUN\BankApplication\obj\Debug\netcoreapp2.1\BankApplication.pdb

@@ -1,7 +1,0 @@
-E:\JFF\Сетевое\ConsoleApp1WebCLient\ConsoleApp1WebCLient\bin\Debug\ConsoleApp1WebCLient.exe.config
-E:\JFF\Сетевое\ConsoleApp1WebCLient\ConsoleApp1WebCLient\bin\Debug\ConsoleApp1WebCLient.exe
-E:\JFF\Сетевое\ConsoleApp1WebCLient\ConsoleApp1WebCLient\bin\Debug\ConsoleApp1WebCLient.pdb
-E:\JFF\Сетевое\ConsoleApp1WebCLient\ConsoleApp1WebCLient\obj\Debug\ConsoleApp1WebCLient.csprojAssemblyReference.cache
-E:\JFF\Сетевое\ConsoleApp1WebCLient\ConsoleApp1WebCLient\obj\Debug\ConsoleApp1WebCLient.csproj.CoreCompileInputs.cache
-E:\JFF\Сетевое\ConsoleApp1WebCLient\ConsoleApp1WebCLient\obj\Debug\ConsoleApp1WebCLient.exe
-E:\JFF\Сетевое\ConsoleApp1WebCLient\ConsoleApp1WebCLient\obj\Debug\ConsoleApp1WebCLient.pdb

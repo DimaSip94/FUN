@@ -1,6 +1,0 @@
-E:\JFF\Сетевое\Sockets\Client\bin\Debug\Client.exe.config
-E:\JFF\Сетевое\Sockets\Client\bin\Debug\Client.exe
-E:\JFF\Сетевое\Sockets\Client\bin\Debug\Client.pdb
-E:\JFF\Сетевое\Sockets\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
-E:\JFF\Сетевое\Sockets\Client\obj\Debug\Client.exe
-E:\JFF\Сетевое\Sockets\Client\obj\Debug\Client.pdb

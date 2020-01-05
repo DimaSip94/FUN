@@ -1,7 +1,0 @@
-E:\JFF\Сетевое\MultiThreadsTCP\MultiThreadsTCP\bin\Debug\MultiThreadsTCP.exe.config
-E:\JFF\Сетевое\MultiThreadsTCP\MultiThreadsTCP\bin\Debug\MultiThreadsTCP.exe
-E:\JFF\Сетевое\MultiThreadsTCP\MultiThreadsTCP\bin\Debug\MultiThreadsTCP.pdb
-E:\JFF\Сетевое\MultiThreadsTCP\MultiThreadsTCP\obj\Debug\MultiThreadsTCP.csprojAssemblyReference.cache
-E:\JFF\Сетевое\MultiThreadsTCP\MultiThreadsTCP\obj\Debug\MultiThreadsTCP.csproj.CoreCompileInputs.cache
-E:\JFF\Сетевое\MultiThreadsTCP\MultiThreadsTCP\obj\Debug\MultiThreadsTCP.exe
-E:\JFF\Сетевое\MultiThreadsTCP\MultiThreadsTCP\obj\Debug\MultiThreadsTCP.pdb

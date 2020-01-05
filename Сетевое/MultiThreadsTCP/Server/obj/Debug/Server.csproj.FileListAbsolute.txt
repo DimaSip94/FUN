@@ -1,6 +1,0 @@
-E:\JFF\Сетевое\MultiThreadsTCP\Server\bin\Debug\Server.exe.config
-E:\JFF\Сетевое\MultiThreadsTCP\Server\bin\Debug\Server.exe
-E:\JFF\Сетевое\MultiThreadsTCP\Server\bin\Debug\Server.pdb
-E:\JFF\Сетевое\MultiThreadsTCP\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
-E:\JFF\Сетевое\MultiThreadsTCP\Server\obj\Debug\Server.exe
-E:\JFF\Сетевое\MultiThreadsTCP\Server\obj\Debug\Server.pdb
