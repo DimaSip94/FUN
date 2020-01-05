@@ -1,0 +1,32 @@
+﻿<div class="mango-number-block">
+    <a href="#0" class="show-number">Показать</a>
+    <span class="mgo-number"></span>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        (function (w, d, u, i, o, s, p) {
+            if (d.getElementById(i)) { return; } w['MangoObject'] = o;
+            w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; w[o].u = u; w[o].t = 1 * new Date();
+            s = d.createElement('script'); s.async = 1; s.id = i; s.src = u;
+            p = d.getElementsByTagName('script')[0]; p.parentNode.insertBefore(s, p);
+        }(window, document, '//widgets.mango-office.ru/widgets/mango.js', 'mango-js', 'mgo'));
+        mgo({ calltracking: { id: 19885 } });
+
+        
+
+        $(document).ready(function () {
+            $(document).on('click', '.show-number', function () {
+                var $parentBlock = $(this).closest('.mango-number-block');
+                // Запрашиваем номер
+                mgo.getNumber({ redirectNumber: '79876543210' }, function (result) {
+                    // Вставляем номер телефона во все теги с классом mgo-number
+                    $('.mgo-number', $parentBlock).forEach(function (elem) {
+                        elem.text = result.number;
+                    });
+                });
+            });
+        });
+    </script>   
+}

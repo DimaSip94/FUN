@@ -1,0 +1,41 @@
+﻿<div>
+    <a class="button" id="startButton">Start</a>
+    <a class="button" id="resetButton">Reset</a>
+</div>
+
+<div>
+    <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+</div>
+
+<div id="sourceSelectPanel">
+    <label for="sourceSelect">Change video source:</label>
+    <select id="sourceSelect" style="max-width:400px"></select>
+</div>
+
+<div>
+    <img id="viki" src="~/uploads/viki.png"/>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/zxing.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/as.code_Scanner.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //video
+            as.code_Scanner.init({
+                startDecodeBtn: "#startButton",
+                resetDecodeBtn:"#resetButton",
+                videoSourceSelect: "#sourceSelect",
+                videoId: "video",
+                callback: function (result) { alert(result); },
+            });
+            //img
+            //as.code_Scanner.init({
+            //    startDecodeBtn: "#startButton",
+            //    callback: function (result) { alert(result); },
+            //    imgId: "viki"
+            //});
+        });
+    </script>
+}

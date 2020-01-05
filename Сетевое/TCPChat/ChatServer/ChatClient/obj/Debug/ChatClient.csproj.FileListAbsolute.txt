@@ -1,0 +1,7 @@
+E:\JFF\Сетевое\TCPChat\ChatServer\ChatClient\obj\Debug\ChatClient.csprojAssemblyReference.cache
+E:\JFF\Сетевое\TCPChat\ChatServer\ChatClient\obj\Debug\ChatClient.csproj.CoreCompileInputs.cache
+E:\JFF\Сетевое\TCPChat\ChatServer\ChatClient\bin\Debug\ChatClient.exe.config
+E:\JFF\Сетевое\TCPChat\ChatServer\ChatClient\bin\Debug\ChatClient.exe
+E:\JFF\Сетевое\TCPChat\ChatServer\ChatClient\bin\Debug\ChatClient.pdb
+E:\JFF\Сетевое\TCPChat\ChatServer\ChatClient\obj\Debug\ChatClient.exe
+E:\JFF\Сетевое\TCPChat\ChatServer\ChatClient\obj\Debug\ChatClient.pdb

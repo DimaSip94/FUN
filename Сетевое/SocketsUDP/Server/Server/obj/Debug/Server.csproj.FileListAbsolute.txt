@@ -1,0 +1,7 @@
+E:\JFF\Сетевое\SocketsUDP\Server\Server\bin\Debug\Server.exe.config
+E:\JFF\Сетевое\SocketsUDP\Server\Server\bin\Debug\Server.exe
+E:\JFF\Сетевое\SocketsUDP\Server\Server\bin\Debug\Server.pdb
+E:\JFF\Сетевое\SocketsUDP\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+E:\JFF\Сетевое\SocketsUDP\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+E:\JFF\Сетевое\SocketsUDP\Server\Server\obj\Debug\Server.exe
+E:\JFF\Сетевое\SocketsUDP\Server\Server\obj\Debug\Server.pdb

@@ -1,0 +1,7 @@
+E:\JFF\Сетевое\Sockets\Sockets\bin\Debug\Sockets.exe.config
+E:\JFF\Сетевое\Sockets\Sockets\bin\Debug\Sockets.exe
+E:\JFF\Сетевое\Sockets\Sockets\bin\Debug\Sockets.pdb
+E:\JFF\Сетевое\Sockets\Sockets\obj\Debug\Server.csprojAssemblyReference.cache
+E:\JFF\Сетевое\Sockets\Sockets\obj\Debug\Server.csproj.CoreCompileInputs.cache
+E:\JFF\Сетевое\Sockets\Sockets\obj\Debug\Sockets.exe
+E:\JFF\Сетевое\Sockets\Sockets\obj\Debug\Sockets.pdb
