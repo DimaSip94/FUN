@@ -19,6 +19,7 @@ namespace BLL.API.SendPulse
         private const string oauthLink = "/oauth/access_token";
         private const string sendEmailLink = "/smtp/emails";
         private const string allowDomainsLink = "/smtp/domains";
+        private const string sendSMSLink = "/sms/send";
 
         private string clientId = "";
         private string clientSecret = "";
@@ -144,12 +145,6 @@ namespace BLL.API.SendPulse
                     String file = Convert.ToBase64String(bytes);
                     attachments_binary.Add(at, file);
                 }
-                //List<string> allowDomains = GetAllowDomains().Result;
-                //if {fromMail} is not allow, than add to domains
-                //if (allowDomains!=null && !allowDomains.Any(x=>x== fromMail)) 
-                //{
-                //    bool tryAddDomain = AddNewDomain(fromMail).Result;
-                //}
 
                 List<SendPulseAddressObject> toMails = new List<SendPulseAddressObject>();
                 foreach (var em in toEmailsName) toMails.Add(new SendPulseAddressObject { email = em.Key, name = em.Value });
@@ -176,9 +171,37 @@ namespace BLL.API.SendPulse
             return result;
         }
 
-        public bool SendSMS(string number, string msg)
+        /// <summary>
+        /// Send SMS
+        /// </summary>
+        /// <param name="sender">sender name</param>
+        /// <param name="phones">array phones</param>
+        /// <param name="body">body message</param>
+        /// <param name="isEmulate">1 or 0 , translit body</param>
+        /// <param name="isTranslit">is translit text</param>
+        /// <returns></returns>
+        public SendPulseSMSAnswerModel SendSMS(string sender, string [] phones, string body, bool isTranslit = false, bool isEmulate = false)
         {
-            throw new NotImplementedException();
+            SendPulseSMSAnswerModel result = new SendPulseSMSAnswerModel();
+            try
+            {
+                SimpleBrowser simpleBrowser = new SimpleBrowser(baseUrl);
+                SendPulseSMSModel sendPulseSMSModel = new SendPulseSMSModel();
+                sendPulseSMSModel.sender = "TestSender";//sender;
+                sendPulseSMSModel.phones = phones;
+                sendPulseSMSModel.body = body;
+                sendPulseSMSModel.transliterate = isTranslit ? 1 : 0;
+                sendPulseSMSModel.emulate = isEmulate ? 1 : 0;
+                string answer = simpleBrowser.PostJSON(sendSMSLink, sendPulseSMSModel, Token).Result;
+                SendPulseSMSAnswerModel answerObject = JsonConvert.DeserializeObject<SendPulseSMSAnswerModel>(answer);
+            }
+            catch (Exception exc)
+            {
+                result.result = false;
+                result.error_code = "503";
+                result.message = exc.Message;
+            }
+            return result;
         }
 
         /// <summary>
@@ -200,11 +223,20 @@ namespace BLL.API.SendPulse
             return res;
         }
 
-        public async Task<bool> SendSMSAsync(string number, string msg)
+        /// <summary>
+        /// Send SMS
+        /// </summary>
+        /// <param name="sender">number of s</param>
+        /// <param name="phones">array phones</param>
+        /// <param name="body">body message</param>
+        /// <param name="isEmulate">1 or 0 , translit body</param>
+        /// <param name="isTranslit">is translit text</param>
+        /// <returns></returns>
+        public async Task<SendPulseSMSAnswerModel> SendSMSAsync(string sender, string[] phones, string body, bool isTranslit = false, bool isEmulate = false)
         {
-            bool res = true;
+            SendPulseSMSAnswerModel res = new SendPulseSMSAnswerModel();
             res = await Task.Run(() => {
-                return SendSMS(number, msg);
+                return SendSMS(sender, phones, body, isTranslit, isEmulate);
             });
             return res;
         }

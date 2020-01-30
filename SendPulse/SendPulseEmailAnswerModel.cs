@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace BLL.API.SendPulse
 {
-    public class SendPulseEmailAnswerModel
+    public class SendPulseEmailAnswerModel : SendPulseAnswerBaseModel
     {
-        public bool result { get; set; }
         public string id { get; set; }
-        public string error_code { get; set; }
-        public string message { get; set; }
     }
 }
