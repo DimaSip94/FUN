@@ -49,6 +49,7 @@
     <Compile Include="BankClient.cs" />
     <Compile Include="DaData.cs" />
     <Compile Include="FUN.cs" />
+    <Compile Include="MonitorTickTock.cs" />
     <Compile Include="MutexPractice.cs" />
     <Compile Include="PractDispos.cs" />
     <Compile Include="Program.cs" />

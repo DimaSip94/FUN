@@ -17,7 +17,14 @@ namespace FUN
     {       
         static void Main(string[] args)
         {
-            Console.ReadKey();
+            MonitorTickTock tt = new MonitorTickTock();
+            MyThread mt1 = new MyThread("Tick", tt);
+            MyThread mt2 = new MyThread("Tock", tt);
+            mt1.thrd.Join();
+            mt2.thrd.Join();
+
+            Console.WriteLine("Часы остановлены");
+            Console.ReadLine();
         }
     }
 }
