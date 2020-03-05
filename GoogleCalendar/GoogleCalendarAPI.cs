@@ -53,7 +53,16 @@ namespace GoogleCalendar
             }
         }
 
-        public List<string> GetEvents(DateTime timeMin, bool showDeleted, bool singleEvents, int maxResults, EventsResource.ListRequest.OrderByEnum orderBy)
+        /// <summary>
+        /// Возвращает список событий
+        /// </summary>
+        /// <param name="timeMin">С какого времени забирать события</param>
+        /// <param name="showDeleted">Показывать удаленные, по умолчанию false</param>
+        /// <param name="singleEvents">Показывать единичные, по умолчанию true</param>
+        /// <param name="maxResults">Максимальное количество событий, по умолчанию 100</param>
+        /// <param name="orderBy">Сортировка событий</param>
+        /// <returns></returns>
+        public List<string> GetEvents(DateTime timeMin, bool showDeleted = false, bool singleEvents = true, int maxResults = 100, EventsResource.ListRequest.OrderByEnum orderBy = EventsResource.ListRequest.OrderByEnum.StartTime)
         {
             List<string> result = new List<string>();
             try
