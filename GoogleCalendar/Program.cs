@@ -19,9 +19,13 @@ namespace GoogleCalendar
         {
 
             GoogleCalendarAPI googleCalendarAPI = new GoogleCalendarAPI("credentials.json", "dima");
-            List<string> events = googleCalendarAPI.GetEvents(DateTime.Now, false, true, 1000, EventsResource.ListRequest.OrderByEnum.StartTime);
+            List<string> events = googleCalendarAPI.GetEvents(DateTime.Now, DateTime.Now.AddYears(10), false, true, 1000, EventsResource.ListRequest.OrderByEnum.StartTime);
             foreach (var ev in events)
                 Console.WriteLine(ev);
+
+            string error;
+            googleCalendarAPI.CreateEvent(DateTime.Now, DateTime.Now.AddDays(1), "Тестовая", out error);
+
             Console.Read();
 
         }

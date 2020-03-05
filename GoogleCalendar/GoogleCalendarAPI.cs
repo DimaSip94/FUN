@@ -15,7 +15,7 @@ namespace GoogleCalendar
 {
     public class GoogleCalendarAPI
     {
-        private string[] Scopes = { CalendarService.Scope.CalendarReadonly };
+        private string[] Scopes = { CalendarService.Scope.CalendarEvents };
         private string ApplicationName = "Google Calendar API .NET Quickstart";
         private UserCredential credential;
         private CalendarService service;
@@ -28,8 +28,7 @@ namespace GoogleCalendar
         {
             try
             {
-                using (var stream =
-               new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
                 {
                     // The file token.json stores the user's access and refresh tokens, and is created
                     // automatically when the authorization flow completes for the first time.
@@ -41,6 +40,7 @@ namespace GoogleCalendar
                         CancellationToken.None,
                         new FileDataStore(credPath, true)).Result;
                 }
+
                 service = new CalendarService(new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = credential,
@@ -57,24 +57,25 @@ namespace GoogleCalendar
         /// Возвращает список событий
         /// </summary>
         /// <param name="timeMin">С какого времени забирать события</param>
-        /// <param name="showDeleted">Показывать удаленные, по умолчанию false</param>
-        /// <param name="singleEvents">Показывать единичные, по умолчанию true</param>
-        /// <param name="maxResults">Максимальное количество событий, по умолчанию 100</param>
+        /// /// <param name="timeMax">До какого времени забирать события</param>
+        /// <param name="showDeleted">Показывать удаленные, по умолчанию False</param>
+        /// <param name="singleEvents">Показывать единичные, по умолчанию False</param>
+        /// <param name="maxResults">Максимальное количество событий, по умолчанию 250</param>
         /// <param name="orderBy">Сортировка событий</param>
         /// <returns></returns>
-        public List<string> GetEvents(DateTime timeMin, bool showDeleted = false, bool singleEvents = true, int maxResults = 100, EventsResource.ListRequest.OrderByEnum orderBy = EventsResource.ListRequest.OrderByEnum.StartTime)
+        public List<string> GetEvents(DateTime timeMin, DateTime timeMax, bool showDeleted = false, bool singleEvents = false, int maxResults = 250, EventsResource.ListRequest.OrderByEnum orderBy = EventsResource.ListRequest.OrderByEnum.StartTime)
         {
             List<string> result = new List<string>();
             try
             {
                 EventsResource.ListRequest request = service.Events.List("primary");
                 request.TimeMin = timeMin;
+                request.TimeMax = timeMax;
                 request.ShowDeleted = showDeleted;
                 request.SingleEvents = singleEvents;
                 request.MaxResults = maxResults;
                 request.OrderBy = orderBy;
 
-                // List events.
                 Events events = request.Execute();
                 if (events.Items != null && events.Items.Count > 0)
                 {
@@ -102,6 +103,39 @@ namespace GoogleCalendar
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public bool CreateEvent(DateTime startEvent, DateTime endEvent, string summary, out string error)
+        {
+            error = "";
+            bool result = true;
+            try
+            {
+                Event body = new Event();
+                body.Summary = summary;
+                body.Start = GetEventDateTime(startEvent);
+                body.End = GetEventDateTime(endEvent); 
+                EventsResource.InsertRequest request = service.Events.Insert(body, "primary");
+                request.Execute();
+            }
+            catch (Exception exc)
+            {
+                error = exc.Message;
+                result = false;
+            }
+            return result;
+        }
+
+        private EventDateTime GetEventDateTime(DateTime dateTime)
+        {
+            EventDateTime eventDateTime = new EventDateTime();
+            eventDateTime.DateTime = dateTime;
+            eventDateTime.Date = dateTime.ToString("yyyy-MM-dd");
+            return eventDateTime;
+        }
 
     }
 }
