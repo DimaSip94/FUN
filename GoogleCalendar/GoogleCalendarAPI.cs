@@ -15,7 +15,13 @@ namespace GoogleCalendar
 {
     public class GoogleCalendarAPI
     {
-        private string[] Scopes = { CalendarService.Scope.CalendarEvents };
+        public delegate void CreateEventHandler(object o, CreateEventArgs createEventArgs);
+        /// <summary>
+        /// Возникает при добавлении события в календарь
+        /// </summary>
+        public CreateEventHandler EventCreated;
+
+        private string[] Scopes = { CalendarService.Scope.Calendar };
         private string ApplicationName = "Google Calendar API .NET Quickstart";
         private UserCredential credential;
         private CalendarService service;
@@ -119,7 +125,8 @@ namespace GoogleCalendar
                 body.Start = GetEventDateTime(startEvent);
                 body.End = GetEventDateTime(endEvent); 
                 EventsResource.InsertRequest request = service.Events.Insert(body, "primary");
-                request.Execute();
+                body = request.Execute();
+                EventCreated?.Invoke(this, new CreateEventArgs("Событие успешно создано", body.Id, body.ETag));
             }
             catch (Exception exc)
             {
@@ -129,11 +136,16 @@ namespace GoogleCalendar
             return result;
         }
 
+        /// <summary>
+        /// Преобразует Datetime в Eventdatetime
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         private EventDateTime GetEventDateTime(DateTime dateTime)
         {
             EventDateTime eventDateTime = new EventDateTime();
             eventDateTime.DateTime = dateTime;
-            eventDateTime.Date = dateTime.ToString("yyyy-MM-dd");
+            eventDateTime.TimeZone = "Europe/Moscow";
             return eventDateTime;
         }
 
