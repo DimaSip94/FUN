@@ -15,11 +15,11 @@ namespace GoogleCalendar
 {
     public class GoogleCalendarAPI
     {
-        public delegate void CreateEventHandler(object o, CreateEventArgs createEventArgs);
+        public delegate void CreateEventHandler(CreateEventArgs createEventArgs);
         /// <summary>
-        /// Возникает при добавлении события в календарь
+        /// Возникает при попытке добавлении события в календарь
         /// </summary>
-        public CreateEventHandler EventCreated;
+        public CreateEventHandler TryEventCreated;
 
         private string[] Scopes = { CalendarService.Scope.Calendar };
         private string ApplicationName = "Google Calendar API .NET Quickstart";
@@ -109,15 +109,10 @@ namespace GoogleCalendar
             
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="error"></param>
-        /// <returns></returns>
-        public bool CreateEvent(DateTime startEvent, DateTime endEvent, string summary, out string error)
+        
+        private CreateEventArgs CreateEvent(DateTime startEvent, DateTime endEvent, string summary)
         {
-            error = "";
-            bool result = true;
+            CreateEventArgs result;
             try
             {
                 Event body = new Event();
@@ -126,14 +121,30 @@ namespace GoogleCalendar
                 body.End = GetEventDateTime(endEvent); 
                 EventsResource.InsertRequest request = service.Events.Insert(body, "primary");
                 body = request.Execute();
-                EventCreated?.Invoke(this, new CreateEventArgs("Событие успешно создано", body.Id, body.ETag));
+                result = new CreateEventArgs(true, "Событие успешно создано", body.Id, body.ETag);
             }
             catch (Exception exc)
             {
-                error = exc.Message;
-                result = false;
+                result = new CreateEventArgs(false, exc.Message, "", "");
             }
             return result;
+        }
+
+        /// <summary>
+        /// Создает событие в календаре
+        /// </summary>
+        /// <param name="startEvent">Начало события</param>
+        /// <param name="endEvent">Конец события</param>
+        /// <param name="summary">Описание</param>
+        /// <returns></returns>
+        public async Task<bool> CreateEventAsync(DateTime startEvent, DateTime endEvent, string summary)
+        {
+            var task = await Task.Run(()=> {
+                var tryCreateEvent = CreateEvent(startEvent, endEvent, summary);
+                TryEventCreated?.Invoke(tryCreateEvent);
+                return tryCreateEvent.isSuccess;
+            });
+            return task;
         }
 
         /// <summary>

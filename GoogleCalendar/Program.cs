@@ -23,15 +23,14 @@ namespace GoogleCalendar
             //foreach (var ev in events)
             //    Console.WriteLine(ev);
 
-            googleCalendarAPI.EventCreated += EventCreated;
+            googleCalendarAPI.TryEventCreated += EventCreated;
 
-            string error;
-            googleCalendarAPI.CreateEvent(DateTime.Now, DateTime.Now.AddDays(1), "Тестовая", out error);
+            googleCalendarAPI.CreateEventAsync(DateTime.Now, DateTime.Now.AddDays(1), "Тестовая");
 
             Console.Read();
         }
 
-        public static void EventCreated(object o, CreateEventArgs createEventArgs)
+        public static void EventCreated(CreateEventArgs createEventArgs)
         {
             Console.WriteLine($"{createEventArgs.message} {createEventArgs.id}");
         }
