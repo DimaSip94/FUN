@@ -20,12 +20,16 @@ namespace GoogleCalendar
 
             using (GoogleCalendarAPI googleCalendarAPI = new GoogleCalendarAPI("credentials.json", "dima"))
             {
-                List<string> events = googleCalendarAPI.GetEvents(DateTime.Now, DateTime.Now.AddYears(10), false, true, 1000, EventsResource.ListRequest.OrderByEnum.StartTime);
-                foreach (var ev in events)
-                    Console.WriteLine(ev);
+                //List<string> events = googleCalendarAPI.GetEvents(DateTime.Now, DateTime.Now.AddYears(10), false, true, 1000, EventsResource.ListRequest.OrderByEnum.StartTime);
+                //foreach (var ev in events)
+                //    Console.WriteLine(ev);
 
                 //googleCalendarAPI.TryEventCreated += EventCreated;
                 //googleCalendarAPI.CreateEventAsync(DateTime.Now, DateTime.Now.AddDays(1), "Тестовая");
+
+                Dictionary<string, string> calendars = googleCalendarAPI.GetCalendars();
+                foreach (var ev in calendars)
+                    Console.WriteLine($"{ev.Key} {ev.Value}");
             }
 
             Console.Read();

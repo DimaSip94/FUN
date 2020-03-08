@@ -70,13 +70,14 @@ namespace GoogleCalendar
         /// <param name="singleEvents">Показывать единичные, по умолчанию False</param>
         /// <param name="maxResults">Максимальное количество событий, по умолчанию 250</param>
         /// <param name="orderBy">Сортировка событий</param>
+        /// <param name="calendarId">Id календаря (по умолчанию primary)</param>
         /// <returns></returns>
-        public List<string> GetEvents(DateTime timeMin, DateTime timeMax, bool showDeleted = false, bool singleEvents = false, int maxResults = 250, EventsResource.ListRequest.OrderByEnum orderBy = EventsResource.ListRequest.OrderByEnum.StartTime)
+        public List<string> GetEvents(DateTime timeMin, DateTime timeMax, bool showDeleted = false, bool singleEvents = false, int maxResults = 250, EventsResource.ListRequest.OrderByEnum orderBy = EventsResource.ListRequest.OrderByEnum.StartTime, string calendarId = "primary")
         {
             List<string> result = new List<string>();
             try
             {
-                EventsResource.ListRequest request = service.Events.List("primary");
+                EventsResource.ListRequest request = service.Events.List(calendarId);
                 request.TimeMin = timeMin;
                 request.TimeMax = timeMax;
                 request.ShowDeleted = showDeleted;
@@ -111,7 +112,7 @@ namespace GoogleCalendar
             
         }
 
-        private CreateEventArgs CreateEvent(DateTime startEvent, DateTime endEvent, string summary)
+        private CreateEventArgs CreateEvent(DateTime startEvent, DateTime endEvent, string summary, string calendarId)
         {
             CreateEventArgs result;
             try
@@ -120,7 +121,7 @@ namespace GoogleCalendar
                 body.Summary = summary;
                 body.Start = GetEventDateTime(startEvent);
                 body.End = GetEventDateTime(endEvent); 
-                EventsResource.InsertRequest request = service.Events.Insert(body, "primary");
+                EventsResource.InsertRequest request = service.Events.Insert(body, calendarId);
                 body = request.Execute();
                 result = new CreateEventArgs(true, "Событие успешно создано", body.Id, body.ETag);
             }
@@ -137,11 +138,12 @@ namespace GoogleCalendar
         /// <param name="startEvent">Начало события</param>
         /// <param name="endEvent">Конец события</param>
         /// <param name="summary">Описание</param>
+        /// <param name="calendarId">Id календаря (по умолчанию primary)</param>
         /// <returns></returns>
-        public async Task<bool> CreateEventAsync(DateTime startEvent, DateTime endEvent, string summary)
+        public async Task<bool> CreateEventAsync(DateTime startEvent, DateTime endEvent, string summary, string calendarId="primary")
         {
             var task = await Task.Run(()=> {
-                var tryCreateEvent = CreateEvent(startEvent, endEvent, summary);
+                var tryCreateEvent = CreateEvent(startEvent, endEvent, summary, calendarId);
                 TryEventCreated?.Invoke(tryCreateEvent);
                 return tryCreateEvent.isSuccess;
             });
@@ -178,6 +180,32 @@ namespace GoogleCalendar
                 disposed = true;
             }
         }
+
+        /// <summary>
+        /// Возвращает словарь (TKey-Id, TValue-Название) календарей
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> GetCalendars()
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            try
+            {
+                CalendarListResource.ListRequest request = service.CalendarList.List();
+                var calendarList = request.Execute();
+                foreach (var cl in calendarList.Items)
+                {
+                    result.Add(cl.Id, cl.Summary);    
+                }
+            }
+            catch (Exception exc)
+            {
+                result = new Dictionary<string, string>();
+                result.Add("Error", "Eception Error: " + exc.Message);
+            }
+            return result;
+
+        }
+
 
     }
 }
