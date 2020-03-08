@@ -13,8 +13,10 @@ using Google.Apis.Util.Store;
 
 namespace GoogleCalendar
 {
-    public class GoogleCalendarAPI
+    public class GoogleCalendarAPI:IDisposable
     {
+        private bool disposed = false;
+
         public delegate void CreateEventHandler(CreateEventArgs createEventArgs);
         /// <summary>
         /// Возникает при попытке добавлении события в календарь
@@ -109,7 +111,6 @@ namespace GoogleCalendar
             
         }
 
-        
         private CreateEventArgs CreateEvent(DateTime startEvent, DateTime endEvent, string summary)
         {
             CreateEventArgs result;
@@ -158,6 +159,24 @@ namespace GoogleCalendar
             eventDateTime.DateTime = dateTime;
             eventDateTime.TimeZone = "Europe/Moscow";
             return eventDateTime;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing && service!=null)
+                {
+                    service.Dispose();
+                }
+                disposed = true;
+            }
         }
 
     }

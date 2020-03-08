@@ -18,14 +18,15 @@ namespace GoogleCalendar
         static void Main(string[] args)
         {
 
-            GoogleCalendarAPI googleCalendarAPI = new GoogleCalendarAPI("credentials.json", "dima");
-            //List<string> events = googleCalendarAPI.GetEvents(DateTime.Now, DateTime.Now.AddYears(10), false, true, 1000, EventsResource.ListRequest.OrderByEnum.StartTime);
-            //foreach (var ev in events)
-            //    Console.WriteLine(ev);
+            using (GoogleCalendarAPI googleCalendarAPI = new GoogleCalendarAPI("credentials.json", "dima"))
+            {
+                List<string> events = googleCalendarAPI.GetEvents(DateTime.Now, DateTime.Now.AddYears(10), false, true, 1000, EventsResource.ListRequest.OrderByEnum.StartTime);
+                foreach (var ev in events)
+                    Console.WriteLine(ev);
 
-            googleCalendarAPI.TryEventCreated += EventCreated;
-
-            googleCalendarAPI.CreateEventAsync(DateTime.Now, DateTime.Now.AddDays(1), "Тестовая");
+                //googleCalendarAPI.TryEventCreated += EventCreated;
+                //googleCalendarAPI.CreateEventAsync(DateTime.Now, DateTime.Now.AddDays(1), "Тестовая");
+            }
 
             Console.Read();
         }
